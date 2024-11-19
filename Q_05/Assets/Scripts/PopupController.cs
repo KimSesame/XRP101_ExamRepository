@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class PopupController : MonoBehaviour
 {
     [SerializeField] private float _deactiveTime;
-    private WaitForSeconds _wait;
     private Button _popupButton;
 
     [SerializeField] private GameObject _popup;
@@ -18,7 +17,6 @@ public class PopupController : MonoBehaviour
 
     private void Init()
     {
-        _wait = new WaitForSeconds(_deactiveTime);
         _popupButton = GetComponent<Button>();
         SubscribeEvent();
     }
@@ -31,18 +29,26 @@ public class PopupController : MonoBehaviour
     private void Activate()
     {
         _popup.gameObject.SetActive(true);
-        GameManager.Intance.Pause();
+        GameManager.Instance.Pause();
         StartCoroutine(DeactivateRoutine());
     }
 
     private void Deactivate()
     {
+        GameManager.Instance.Resume();
         _popup.gameObject.SetActive(false);
     }
 
     private IEnumerator DeactivateRoutine()
     {
-        yield return _wait;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < _deactiveTime)
+        {
+            elapsedTime += Time.unscaledDeltaTime;
+            yield return null;
+        }
+
         Deactivate();
     }
 }
