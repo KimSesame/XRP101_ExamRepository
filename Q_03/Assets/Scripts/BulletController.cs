@@ -26,7 +26,13 @@ public class BulletController : PooledBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other
+            Transform otherTransform = other.transform;
+            while (otherTransform.GetComponent<PlayerController>() == null)
+            {
+                otherTransform = otherTransform.parent;
+            }
+
+            otherTransform
                 .GetComponent<PlayerController>()
                 .TakeHit(_damageValue);
         }
@@ -51,6 +57,8 @@ public class BulletController : PooledBehaviour
 
     public override void ReturnPool()
     {
+        _rigidbody.velocity = Vector3.zero;
+
         Pool.Push(this);
         gameObject.SetActive(false);
     }

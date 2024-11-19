@@ -21,4 +21,10 @@
 제시된 프로젝트에서 발생하는 `문제들을 모두 서술`하고 올바르게 동작하도록 `소스코드를 개선`하시오.
 
 ## 답안
-- 
+1. Turret과 Player 모두 Rigidbody가 존재하지 않아 트리거 판정이 발생하지 않는다.
+2. Bullet에 Rigidbody가 존재하지 않지만 BulletController 스크립트에서 접근한다.
+3. 총알과의 트리거가 발생한 플레이어 태그를 가지고 있는 오브젝트는 충돌체를 가지고 있는 Body오브젝트이고 해당 오브젝트는 PlayerController 컴포넌트를 포함하지 않기 때문에 BulletController의 OnTriggerEnter()에서 other로부터 PlayerController를 가져올 수 없다.
+4. Turret의 Trigger 범위 밖으로 플레이어가 나가도 발사를 중지하지 않는다.
+5. Bullet이 발사될 때 이전 발사 상황의 영향이 남아있어 속도와 방향이 올바르지 않을 때가 있다.
+6. 플레이어 사망 시 효과음 재생과 동시에 비활성화돼 효과음이 들리지 않는다.
+7. 플레이어 사망 후에도 Turret이 계속해서 발포한다.
