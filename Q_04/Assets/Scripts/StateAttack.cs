@@ -30,11 +30,6 @@ public class StateAttack : PlayerState
         Debug.Log("Attack On Update");
     }
 
-    public override void Exit()
-    {
-        Machine.ChangeState(StateType.Idle);
-    }
-
     private void Attack()
     {
         Collider[] cols = Physics.OverlapSphere(
@@ -46,7 +41,7 @@ public class StateAttack : PlayerState
         foreach (Collider col in cols)
         {
             damagable = col.GetComponent<IDamagable>();
-            damagable.TakeHit(Controller.AttackValue);
+            damagable?.TakeHit(Controller.AttackValue);
         }
     }
 
@@ -55,7 +50,7 @@ public class StateAttack : PlayerState
         yield return _wait;
 
         Attack();
-        Exit();
+        Machine.ChangeState(StateType.Idle);
     }
 
 }

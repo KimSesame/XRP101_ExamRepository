@@ -18,4 +18,5 @@
 제시된 프로젝트에서 발생하는 `문제들을 모두 서술`하고 올바르게 동작하도록 `소스코드를 개선`하시오.
 
 ## 답안
-- 
+1. IDamagable을 포함하지 않는 오브젝트에게도 피해를 입히려고 시도 중
+2. StateAttack의 Exit()에서 StateMachine의 ChangeState()를 호출하고, ChnageState()에서 StateAttack의 Exit()을 호출하는 상황이 존재
