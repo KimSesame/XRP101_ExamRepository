@@ -18,4 +18,8 @@
 제시된 프로젝트에서 발생하는 `문제들을 모두 서술`하고 올바르게 동작하도록 `소스코드를 개선`하시오.
 
 ## 답안
-- 
+1. 중복시 삭제하지 않아 싱글톤 객체가 여러개 존재
+2. Main Scene에 EventSystem이 존재하지않아 UI와 상호작용 불가
+3. Game Scene에 EventSystem이 존재하지않아 UI와 상호작용 불가
+4. [timeScale](https://docs.unity3d.com/kr/2021.3/Manual/TimeFrameManagement.html)이 0이 되어 코루틴이 정상작동하지 않아 Popup창이 2초 후 자동으로 닫히지 않음
+5. 큐브의 회전에 Time.deltaTime이 관여하지 않아 Popup창이 떠있는 동안 큐브의 회전이 정지하지 않음
